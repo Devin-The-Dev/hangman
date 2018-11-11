@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Document</title>
+  </head>
+
+  <!--
+    Objectives:
+    create a theme
+    display on the page:
+        press any key to get started
+        wins: (# of times user guessed the word correctly
+            display like this when the game starts _ _ _ _ _ _
+            reveal them uppon correct letters
+        number of guesses remaining
+        letters already guessed
+        Upon game over, game will choose another word and have user play it
+  -->
+
+  <body>
+    <section class="startUp" id="startUp" onclick="startUp()">
+      <div><p>Click anywhere to get started!</p></div>
+    </section>
+
+    <section class="score">
+      <div>
+        <span id="win">
+          Wins: 0
+          <!-- display number -->
+        </span>
+        <span id="lose">
+          Loses: 0
+          <!-- display number -->
+        </span>
+      </div>
+    </section>
+    <div class="hangman">
+      <img class="0" src="assets/images/stand.png" alt="" />
+      <img class="1" src="assets/images/noose.png" alt="" />
+      <img class="2" src="assets/images/head.png" alt="" />
+      <img class="3" src="assets/images/body.png" alt="" />
+      <img class="4" src="assets/images/legLeft.png" alt="" />
+      <img class="5" src="assets/images/legRight.png" alt="" />
+      <img class="6" src="assets/images/armLeft.png" alt="" />
+      <img class="7" src="assets/images/gameOver.png" alt="" />
+    </div>
+    <div><p id="hiddenWord"></p></div>
+    <div class="attempts">
+      <div class="remaining">
+        Guesses Remaining:
+        <p id="numbers"></p>
+        <!-- display number -->
+      </div>
+      <div class="guessed">
+        Letters Guessed:
+        <p id="letters">...</p>
+        <!-- display letters -->
+      </div>
+    </div>
+    <script src="assets/javascript/game.js"></script>
+  </body>
+</html>

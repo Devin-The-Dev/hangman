@@ -1,0 +1,35 @@
+<!--
+  ----------------------------TEST PAGE--------------------------------------------
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var array = "b u z z l i g h t y e a r";
+      console.log(array.split(" "));
+
+      document.onkeyup = function() {
+        var letterGuessed = String.fromCharCode(event.keyCode).toLowerCase(); //What is event? --- Any button action a user does on a mouse or keyboard
+        console.log("this is the letter we type", letterGuessed);
+        checkLetters(letterGuessed); //checkLetters not defined --- checkLetters is a function. Here, checkLetters os a perameter named
+        roundComplete();
+      };
+
+      var car = {
+        make: 'Ford',
+        model: 'mustang',
+        gas: 50,
+        miles: '100',
+        soda: function (arg) {
+          this.issoda() = arg
+        }
+      }
+    </script>
+  </body>
+</html>
