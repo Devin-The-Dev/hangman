@@ -1,79 +1,151 @@
-/* 
-I know:
-assigning variables
-if/else statments
-for loops
-functions
-methods
-oporators
-*/
+var wordList = ["buzz", "nemo", "stitch", "moana"];
+
+var chosenWord = ""; //when select word at random from the wordList
+
+var lettersInChosenWord = []; //word that is played on is going to break it up into letters
+
+var numBlanks = 0; //will hold the number of letters in the word
+
+var blanksAndSuccesses = []; //will store the right or wrong letters. stores underscores or letters
+
+var wrongGuesses = []; //stores the wrong letter guesses
+
+var winCounter = 0;
+var lossCounter = 1;
+var numGuesses = 7; //only have 9 lives
+
+//var hangmanImg = [];
 
 /*
-  I still need:
-  The correct and incorrect letters to display
-  Hangman picture changes when players guesses incorrectly
-*/
-
-var characters = ["Buzz", "Nemo", "Stitch", "Moana"];
-var word = characters[Math.floor(Math.random() * characters.length)];
-var wordArray = word.split(""); // empty string is what makes a chosen word into an array
-console.log(wordArray);
-var letters = "abcdefghijklmnopqrstuvwxyz";
-var lettersArray = letters.split("");
-console.log(lettersArray);
-var hiddenWord = "";
-var mistakesRemaining = 7;
-var guess;
-var guessesLeft = 25;
-var lettersGuessed; //Variable is meant for letters the player guessed wrong
+    1. select a word at random
+    2. want to break up that random word into letters and replace them with underscores
+    3. we want to add those underscores to the HTML
+    4. numguesses always equals 9, and blankandsuccess is an empty array. and wrongguesses is empty as well
+    */
 
 function startUp() {
   document.getElementById("startUp").style.display = "none";
 }
 
-// Section displays underscores on screen, somehow it's not displayed if turned into a function
-for (var i = 0; word.length > i; i++) {
-  if (wordArray == lettersArray) {
+function startGame() {
+  numGuesses = 7;
+  blanksAndSuccesses = []; //makes empty at start
+  wrongGuesses = []; //makes empty at start
+
+  chosenWord = wordList[Math.floor(Math.random() * wordList.length)];
+  lettersInChosenWord = chosenWord.split("");
+  numBlanks = lettersInChosenWord.length;
+  console.log(chosenWord);
+  console.log(numBlanks);
+
+  for (var i = 0; i < numBlanks; i++) {
+    blanksAndSuccesses.push("_");
+  }
+  console.log(blanksAndSuccesses);
+  document.getElementById("hiddenWord").innerHTML = blanksAndSuccesses.join(
+    " "
+  );
+  document.getElementById("numbers").innerHTML = numGuesses;
+  document.getElementById("letters").innerHTML = wrongGuesses.join(" ");
+}
+
+function checkLetters(letter) {
+  //function that gets input from the user
+
+  var letterInWord = false;
+  //1. Compare the letter the user picks matches any of the letters in the word
+  //2. I want a conditional statement to determine if the letter the user picked is in the word. If so, do something, if not, do something else.
+  for (var i = 0; i < numBlanks; i++) {
+    if (chosenWord[i] === letter) {
+      letterInWord = true;
+    }
+  }
+  //will only run if above for loop is true
+  if (letterInWord) {
+    for (i = 0; i < numBlanks; i++) {
+      if (chosenWord[i] === letter) {
+        blanksAndSuccesses[i] = letter;
+      }
+      console.log("inside our checkletter function", blanksAndSuccesses);
+    }
+    //3. If the user is wrong we want to decrease the numGuesses variables by one
   } else {
-    hiddenWord += "_";
+    //if letter is wrong
+    numGuesses--;
+    wrongGuesses.push(letter);
+  }
+  console.log(
+    "our wrong guesses inside our checkletter function",
+    wrongGuesses
+  );
+}
+/* to check if a letter is already in the wrong guesses array. set up an if/else conditional that will run a for loop that will iterate ocer all teh letters and then use the if/else to check if it already exists.
+ */
+
+function roundComplete() {
+  /*
+    1. Its going to update the HTML with the letters that are in the word
+    2. Its going to update the HTML with guesses we have left
+    3. Its going to update the HTML to show the wrong guesses
+    4. Its going to determine whether the user won the game or not
+    */
+  document.getElementById("hiddenWord").innerHTML = blanksAndSuccesses.join(
+    " "
+  );
+  document.getElementById("numbers").innerHTML = numGuesses;
+  document.getElementById("letters").innerHTML = wrongGuesses.join(" ");
+
+  console.log(lettersInChosenWord);
+  console.log(blanksAndSuccesses);
+  if (lettersInChosenWord.join(" ") === blanksAndSuccesses.join(" ")) {
+    winCounter++;
+    alert("You win!!");
+    document.getElementById("w_Number").innerHTML = winCounter;
+    startGame();
+  } else if (numGuesses === 0) {
+    document.getElementById("l_Number").innerHTML = lossCounter++;
+    document.getElementById("letters").innerHTML = " ";
+    alert("you don't have anymore guesses left");
+    startGame();
   }
 }
-document.getElementById("hiddenWord").innerHTML = hiddenWord;
+startGame();
 
-//Guesses Remaining
-document.getElementById("numbers").innerHTML = guessesLeft;
-document.onkeyup = function(event) {
-  guess = event.key;
-  console.log("inside", guess);
-  if (document.onkeyup != wordArray) {
-    guessesLeft--;
-    document.getElementById("numbers").innerHTML = guessesLeft;
-    console.log(guessesLeft);
-  }
+document.onkeyup = function() {
+  /*
+        1. its going to take in the letter that we type in
+        2. its going to pass it through the CheckLetter function
+        */
+  var letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
+  console.log("this is the letter we type", letterGuessed);
+  checkLetters(letterGuessed);
+  roundComplete();
 };
 
-//Letters Guessed wrong
-document.onkey = function(event) {
-  lettersGuessed = event.key;
-  console.log("inside2", lettersGuessed);
-  if (document.onkeyup != wordArray) {
-    lettersGuessed++;
-    document.getElementById("letters").innerHTML = lettersGuessed.push;
-    console.log(lettersGuessed);
-  }
-};
-//Guesses: Remaining and letters
+/*
+    for (var i = 0; i > image.length; i++) {
+        if (numGuesses-- === true) {
+            document.getElementById(hangman) = imageArray++;
+        }
+    }
 
-/*function {
-  if (var j = 0, j < lettersArray.length; j++) {
-  show it and -1 Guesses Remaining and add letter to Letters Guessed
-  } else {
-  move 1 photo slide and -1 guesses remaining and add letter to Letters Guessed 
-  }
-}*/
+//Another way
+var hangman = document.getElementById("hangman");
+var hangmanImages = [
+  "../images/noose.png",
+  "../images/body.png",
+  "../images/legLeft.png",
+  "../images/legRight.png",
+  "../images/armLeft.png",
+  "../images/gameOver.png"
+];
+var hangmanIndex = 0;
 
-/*function compare (wordArray, guess) {
-  for (var j = 0; j < wordArray.length; j++) {
-    if ()
+function hangmanSlides() {
+  hangman.setAttribute("src", hangmanImages[i]);
+  hangmanImages++;
+  for (var i = 0; i < hangmanImages.length; i++) {
+    hangman[i];
   }
-}*/
+}
+*/

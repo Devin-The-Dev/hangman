@@ -20,6 +20,11 @@ body {
   font-size: 70px;
 }
 
+#hangman {
+  display: flex;
+  justify-content: center;
+}
+
 .score,
 #hiddenWord,
 .attempts {

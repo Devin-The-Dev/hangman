@@ -29,25 +29,38 @@
 
     <section class="score">
       <div>
-        <span id="win">
-          Wins: 0
-          <!-- display number -->
+        <span class="win">
+          Wins:
+          <span id="w_Number">
+            0
+            <!-- display number -->
+          </span>
         </span>
-        <span id="lose">
-          Loses: 0
-          <!-- display number -->
+        <span class="lose">
+          Loses:
+          <span id="l_Number">
+            0
+            <!-- display number -->
+          </span>
         </span>
       </div>
     </section>
-    <div class="hangman">
-      <img class="0" src="assets/images/stand.png" alt="" />
-      <img class="1" src="assets/images/noose.png" alt="" />
-      <img class="2" src="assets/images/head.png" alt="" />
-      <img class="3" src="assets/images/body.png" alt="" />
-      <img class="4" src="assets/images/legLeft.png" alt="" />
-      <img class="5" src="assets/images/legRight.png" alt="" />
-      <img class="6" src="assets/images/armLeft.png" alt="" />
-      <img class="7" src="assets/images/gameOver.png" alt="" />
+    <div id="hangman">
+      <img
+        class="0"
+        src="assets/images/stand.png"
+        alt=""
+        onkeyup="hangmanSlides()"
+      />
+      <!--
+        <img class="1" src="assets/images/noose.png" alt="" />
+        <img class="2" src="assets/images/head.png" alt="" />
+        <img class="3" src="assets/images/body.png" alt="" />
+        <img class="4" src="assets/images/legLeft.png" alt="" />
+        <img class="5" src="assets/images/legRight.png" alt="" />
+        <img class="6" src="assets/images/armLeft.png" alt="" />
+        <img class="7" src="assets/images/gameOver.png" alt="" />
+      -->
     </div>
     <div><p id="hiddenWord"></p></div>
     <div class="attempts">
@@ -58,10 +71,10 @@
       </div>
       <div class="guessed">
         Letters Guessed:
-        <p id="letters">...</p>
+        <p id="letters"></p>
         <!-- display letters -->
       </div>
     </div>
-    <script src="assets/javascript/game.js"></script>
+    <script src="assets/javascript/test.js"></script>
   </body>
 </html>
