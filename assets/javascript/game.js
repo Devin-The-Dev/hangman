@@ -53,7 +53,7 @@ function startGame() {
 }
 
 function checkLetters(letter) {
-  //function that gets input from the user
+  //function that gets keyboard letter from the user
 
   var letterInWord = false;
   //1. Compare the letter the user picks matches any of the letters in the word
@@ -71,7 +71,7 @@ function checkLetters(letter) {
       }
       console.log("inside our checkletter function", blanksAndSuccesses);
     }
-    //3. If the user is wrong we want to decrease the numGuesses variables by one
+    //3. If the user is wrong, decrease the numGuesses variables by one
   } else {
     //if letter is wrong
     numGuesses--;
@@ -88,10 +88,10 @@ function checkLetters(letter) {
 
 function roundComplete() {
   /*
-    1. Its going to update the HTML with the letters that are in the word
-    2. Its going to update the HTML with guesses we have left
-    3. Its going to update the HTML to show the wrong guesses
-    4. Its going to determine whether the user won the game or not
+    1. Update the HTML with the letters that are in the word
+    2. Update the HTML with guesses we have left
+    3. Update the HTML to show the wrong guesses
+    4. Determine if the user won the game or not
     */
   document.getElementById("hiddenWord").innerHTML = blanksAndSuccesses.join(
     " "
@@ -126,14 +126,7 @@ document.onkeyup = function() {
   checkLetters(letterGuessed);
   roundComplete();
 };
-/*
-for (var i = 0; i > image.length; i++) {
-  if (numGuesses-- === true) {
-    document.getElementById(hangman).innerHTML = imageArray++;
-  }
-}
-*/
-//Another way
+
 var hangmanImages = [
   "assets/images/noose.png",
   "assets/images/head.png",
@@ -150,4 +143,4 @@ function hangmanSlides() {
   count++;
 }
 
-//DON'T FORGET TO ADD IN -M COMMIT "ADDED +1 TO WINS AND LOSSES COUNTERS DEPENDING IF USER WON OR LOST THE GAME"
+//Still can't get the computer to recognize a previous letter has already been guessed.
