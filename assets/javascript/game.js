@@ -6,15 +6,17 @@ var lettersInChosenWord = []; //word that is played on is going to break it up i
 
 var numBlanks = 0; //will hold the number of letters in the word
 
-var blanksAndSuccesses = []; //will store the right or wrong letters. stores underscores or letters
+var blanksAndSuccesses = []; //will store the guessed letters.
 
-var wrongGuesses = []; //stores the wrong letter guesses
+var wrongGuesses = []; //stores wrong guessed letters.
+
+var count = 0;
+
+var hangman = document.getElementById("hangmanImg");
 
 var winCounter = 0;
 var lossCounter = 1;
-var numGuesses = 7; //only have 9 lives
-
-//var hangmanImg = [];
+var numGuesses = 7;
 
 /*
     1. select a word at random
@@ -31,6 +33,7 @@ function startGame() {
   numGuesses = 7;
   blanksAndSuccesses = []; //makes empty at start
   wrongGuesses = []; //makes empty at start
+  count = 0;
 
   chosenWord = wordList[Math.floor(Math.random() * wordList.length)];
   lettersInChosenWord = chosenWord.split("");
@@ -73,13 +76,14 @@ function checkLetters(letter) {
     //if letter is wrong
     numGuesses--;
     wrongGuesses.push(letter);
+    hangmanSlides();
   }
   console.log(
     "our wrong guesses inside our checkletter function",
     wrongGuesses
   );
 }
-/* to check if a letter is already in the wrong guesses array. set up an if/else conditional that will run a for loop that will iterate ocer all teh letters and then use the if/else to check if it already exists.
+/* to check if a letter is already in the wrong guesses array. set up an if/else conditional that will run a for loop that will iterate over all the letters and then use if/else to check if it already exists.
  */
 
 function roundComplete() {
@@ -107,6 +111,7 @@ function roundComplete() {
     document.getElementById("letters").innerHTML = " ";
     alert("you don't have anymore guesses left");
     startGame();
+    hangmanSlides();
   }
 }
 startGame();
@@ -121,31 +126,28 @@ document.onkeyup = function() {
   checkLetters(letterGuessed);
   roundComplete();
 };
-
 /*
-    for (var i = 0; i > image.length; i++) {
-        if (numGuesses-- === true) {
-            document.getElementById(hangman) = imageArray++;
-        }
-    }
-
-//Another way
-var hangman = document.getElementById("hangman");
-var hangmanImages = [
-  "../images/noose.png",
-  "../images/body.png",
-  "../images/legLeft.png",
-  "../images/legRight.png",
-  "../images/armLeft.png",
-  "../images/gameOver.png"
-];
-var hangmanIndex = 0;
-
-function hangmanSlides() {
-  hangman.setAttribute("src", hangmanImages[i]);
-  hangmanImages++;
-  for (var i = 0; i < hangmanImages.length; i++) {
-    hangman[i];
+for (var i = 0; i > image.length; i++) {
+  if (numGuesses-- === true) {
+    document.getElementById(hangman).innerHTML = imageArray++;
   }
 }
 */
+//Another way
+var hangmanImages = [
+  "assets/images/noose.png",
+  "assets/images/head.png",
+  "assets/images/body.png",
+  "assets/images/legLeft.png",
+  "assets/images/legRight.png",
+  "assets/images/armLeft.png",
+  "assets/images/gameOver.png"
+];
+
+function hangmanSlides() {
+  console.log("got in");
+  hangman.setAttribute("src", hangmanImages[count]);
+  count++;
+}
+
+//DON'T FORGET TO ADD IN -M COMMIT "ADDED +1 TO WINS AND LOSSES COUNTERS DEPENDING IF USER WON OR LOST THE GAME"
